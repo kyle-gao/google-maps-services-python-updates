@@ -15,6 +15,13 @@
 # the License.
 #
 
+def lat_lng_2_latitude_longitude(input_dict):
+    # Convert the dictionary with 'lat' and 'lng' to 'latitude' and 'longitude'
+    return {
+        "latitude": input_dict.get("lat"),
+        "longitude": input_dict.get("lng")
+    }
+
 """Converts Python types to string representations suitable for Maps API server.
 
     For example:

@@ -310,7 +310,7 @@ class Client:
         if post_json is not None:
             requests_method = self.session.post
             final_requests_kwargs["json"] = post_json
-        return base_url + authed_url,final_requests_kwargs
+        #return base_url + authed_url,final_requests_kwargs
         try:
             response = requests_method(base_url + authed_url,
                                        **final_requests_kwargs)
