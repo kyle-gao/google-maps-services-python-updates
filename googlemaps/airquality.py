@@ -1,5 +1,6 @@
+#No Copyright, airquality API functionality added by Kyle Gao. 
 
-
+from googlemaps import convert
 
 
 def airquality_currentconditions(client, coord_dict, uaqiColorPalette=None, customLocalAqis=None, universalAqi=None, languageCode=None, EC_LOCAL_AQI = False,
