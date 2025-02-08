@@ -358,16 +358,23 @@ class Client:
 
         body = response.json()
 
-        api_status = body["status"]
+        try:
+            api_status = body["status"]
+        except KeyError:
+            # If "status" is missing, return the full body instead of raising an error
+            return body  
+
         if api_status == "OK" or api_status == "ZERO_RESULTS":
             return body
 
         if api_status == "OVER_QUERY_LIMIT":
             raise googlemaps.exceptions._OverQueryLimit(
-                api_status, body.get("error_message"))
+                api_status, body.get("error_message")
+            )
 
-        raise googlemaps.exceptions.ApiError(api_status,
-                                             body.get("error_message"))
+        raise googlemaps.exceptions.ApiError(
+            api_status, body.get("error_message")
+        )
 
     def _generate_auth_url(self, path, params, accepts_clientid):
         """Returns the path and query string portion of the request URL, first
