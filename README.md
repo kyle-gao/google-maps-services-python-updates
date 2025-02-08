@@ -1,5 +1,5 @@
-Feb-02-08: Testing additions to These client bindings:
-Planning to add Air Quality API and Traffic API.
+## Feb-02-08: Testing additions to These client bindings:
+## Planning to add Air Quality API and Traffic API.
 
 Python Client for Google Maps Services
 ====================================
