@@ -20,7 +20,7 @@ from googlemaps import convert
 
 
 def geocode(client, address=None, place_id=None, components=None, bounds=None, region=None,
-            language=None):
+            language=None, ADDRESS_DESCRIPTORS = False, BUILDING_AND_ENTRANCES = False):
     """
     Geocoding is the process of converting addresses
     (like ``"1600 Amphitheatre Parkway, Mountain View, CA"``) into geographic
@@ -74,11 +74,23 @@ def geocode(client, address=None, place_id=None, components=None, bounds=None, r
     if language:
         params["language"] = language
 
+
+
+    extra_computations = []
+    if ADDRESS_DESCRIPTORS:
+        extra_computations.append("ADDRESS_DESCRIPTORS")
+    if BUILDING_AND_ENTRANCES:
+        extra_computations.append("BUILDING_AND_ENTRANCES")
+
+    params["extra_computations"] = extra_computations
+
+
+
     return client._request("/maps/api/geocode/json", params)
 
 
 def reverse_geocode(client, latlng, result_type=None, location_type=None,
-                    language=None, enable_address_descriptor=False):
+                    language=None, enable_address_descriptor=False, ADDRESS_DESCRIPTORS = False, BUILDING_AND_ENTRANCES = False ):
     """
     Reverse geocoding is the process of converting geographic coordinates into a
     human-readable address.
@@ -118,7 +130,15 @@ def reverse_geocode(client, latlng, result_type=None, location_type=None,
     if language:
         params["language"] = language
 
-    if enable_address_descriptor:
-        params["enable_address_descriptor"] = "true"
+    #if enable_address_descriptor:
+    #   params["enable_address_descriptor"] = "true"
+
+    extra_computations = []
+    if ADDRESS_DESCRIPTORS:
+        extra_computations.append("ADDRESS_DESCRIPTORS")
+    if BUILDING_AND_ENTRANCES:
+        extra_computations.append("BUILDING_AND_ENTRANCES")
+    params["extra_computations"] = extra_computations
+
 
     return client._request("/maps/api/geocode/json", params)
