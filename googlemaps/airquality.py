@@ -23,12 +23,12 @@ def airquality_currentconditions(client, coord_dict, uaqiColorPalette=None, cust
         params_post_json["uaqiColorPalette"] = uaqiColorPalette
 
     if customLocalAqis:
-        params_post_json["uaqiColorPalette"] = customLocalAqis
+        params_post_json["customLocalAqis"] = customLocalAqis
 
-    if customLocalAqis:
+    if universalAqi:
         params_post_json["universalAqi"] = universalAqi
         
-    if customLocalAqis:
+    if languageCode:
         params_post_json["languageCode"] = languageCode
 
 
@@ -98,12 +98,12 @@ def airquality_history(client, coord_dict, dateTime = None, hours = None, pageSi
         params_post_json["uaqiColorPalette"] = uaqiColorPalette
 
     if customLocalAqis:
-        params_post_json["uaqiColorPalette"] = customLocalAqis
+        params_post_json["customLocalAqis"] = customLocalAqis
 
-    if customLocalAqis:
+    if universalAqi:
         params_post_json["universalAqi"] = universalAqi
         
-    if customLocalAqis:
+    if languageCode:
         params_post_json["languageCode"] = languageCode
 
 
