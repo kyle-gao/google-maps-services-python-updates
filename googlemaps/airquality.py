@@ -87,7 +87,7 @@ def airquality_history(client, coord_dict, dateTime = None, hours = None, pageSi
     if pageSize:
         params_post_json["pageSize"] = pageSize
     if pageToken:
-        params_post_json["pageToken"] = pageSize
+        params_post_json["pageToken"] = pageToken
     if period:
         params_post_json["period"] = period
     
