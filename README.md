@@ -1,4 +1,5 @@
-## Feb-02-08: Testing additions to These client bindings:
+## Feb-02-08: Testing additions to these client bindings:
+-Air Quality History, Heatmaps, Current.
 ## Planning to add Air Quality API and Traffic API.
 
 Python Client for Google Maps Services
