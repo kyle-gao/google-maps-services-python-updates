@@ -2,6 +2,74 @@
 
 from googlemaps import convert
 
+def airquality_heat_map(client, map_type="UAQI_INDIGO_PERSIAN", zoom=0, x=0, y=0, key=None):
+    """
+    Retrieve air quality heatmap tiles from Google's Air Quality API.
+    
+    Args:
+        client: The API client object with _request method.
+        map_type (str): Type of air quality map. Allowed values:
+            - "MAP_TYPE_UNSPECIFIED": The default value (server ignores this parameter)
+            - "UAQI_RED_GREEN": Universal Air Quality Index red-green palette
+            - "UAQI_INDIGO_PERSIAN": Universal Air Quality Index indigo-persian palette (default)
+            - "PM25_INDIGO_PERSIAN": PM2.5 index indigo-persian palette
+            - "GBR_DEFRA": Daily Air Quality Index (UK) color palette
+            - "DEU_UBA": German Local Air Quality Index color palette
+            - "CAN_EC": Canadian Air Quality Health Index color palette
+            - "FRA_ATMO": France Air Quality Index color palette
+            - "US_AQI": US Air Quality Index color palette
+        zoom (int): Zoom level for the tile (typically 0-20 for map tiles).
+        x (int): X coordinate of the tile in the map grid.
+        y (int): Y coordinate of the tile in the map grid.
+        key (str, optional): Your API key if not already handled by the client.
+    
+    Returns:
+        Response from the API containing the heatmap tile image data (usually PNG format).
+    
+    Raises:
+        ValueError: If invalid parameters are provided.
+        requests.exceptions.HTTPError: If the API request fails.
+    
+    Example:
+        # Get a US AQI heatmap tile at zoom level 10, tile coordinates (123, 456)
+        response = airquality_heat_map(client, "US_AQI", 10, 123, 456)
+        
+    Note:
+        - The API returns image tiles that should be displayed on a map
+        - Coordinate values should be valid for the specified zoom level
+        - Requires proper authentication via API key
+        - See https://developers.google.com/maps/documentation/air-quality for details
+    """
+    # Validate map_type against known values
+    valid_map_types = {
+        "MAP_TYPE_UNSPECIFIED",
+        "UAQI_RED_GREEN",
+        "UAQI_INDIGO_PERSIAN",
+        "PM25_INDIGO_PERSIAN",
+        "GBR_DEFRA",
+        "DEU_UBA",
+        "CAN_EC",
+        "FRA_ATMO",
+        "US_AQI"
+    }
+    
+    if map_type not in valid_map_types:
+        raise ValueError(f"Invalid map_type. Must be one of: {', '.join(valid_map_types)}")
+    
+    url = f"/v1/mapTypes/{map_type}/heatmapTiles/{zoom}/{x}/{y}"
+    
+    params = {}
+    if key:
+        params['key'] = key
+    
+    response = client._request(
+        base_url="https://airquality.googleapis.com",
+        url=url,
+        params = params,
+        extract_body=lambda response: response,
+        requests_kwargs={"stream": True},
+    )
+    return response.iter_content()
 
 def airquality_currentconditions(client, coord_dict, uaqiColorPalette=None, customLocalAqis=None, universalAqi=None, languageCode=None, EC_LOCAL_AQI = False,
                                  EC_HEALTH_RECOMMENDATIONS = False, EC_POLLUTANT_ADDITIONAL_INFO = False, EC_POLLUTANT_CONCENTRATION = False, EC_DOMINANT_POLLUTANT_CONCENTRATION = False):
