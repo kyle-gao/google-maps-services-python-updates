@@ -4,7 +4,7 @@ from googlemaps import convert
 
 def airquality_heat_map(client, map_type="UAQI_INDIGO_PERSIAN", zoom=0, x=0, y=0, key=None):
     """
-    Retrieve air quality heatmap tiles from Google's Air Quality API.
+    Retrieve air quality heatmap tiles from Google's Air Quality API. See https://developers.google.com/maps/documentation/air-quality/heatmaps
     
     Args:
         client: The API client object with _request method.
@@ -21,6 +21,7 @@ def airquality_heat_map(client, map_type="UAQI_INDIGO_PERSIAN", zoom=0, x=0, y=0
         zoom (int): Zoom level for the tile (typically 0-20 for map tiles).
         x (int): X coordinate of the tile in the map grid.
         y (int): Y coordinate of the tile in the map grid.
+        x,y start at 0,0 on the top left, and increment up to the right and bottom.
         key (str, optional): Your API key if not already handled by the client.
     
     Returns:
