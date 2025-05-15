@@ -1,4 +1,4 @@
-#No Copyright, airquality API functionality added by Kyle Gao. 
+#See https://developers.google.com/maps/documentation/air-quality/overview for API documentation.
 
 from googlemaps import convert
 

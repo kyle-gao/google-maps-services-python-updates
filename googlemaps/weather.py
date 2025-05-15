@@ -1,3 +1,5 @@
+#See https://developers.google.com/maps/documentation/weather for API documentation.
+
 def weather_currentconditions(client, coord_dict, languageCode=None, unitsSystem = "METRIC"):
     """Fetches current weather conditions for a specific location from the Google Weather API.
 
