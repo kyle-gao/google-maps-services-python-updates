@@ -25,7 +25,7 @@ def airquality_heat_map(client, map_type="UAQI_INDIGO_PERSIAN", zoom=0, x=0, y=0
         key (str, optional): Your API key if not already handled by the client.
     
     Returns:
-        Response from the API containing the heatmap tile image data (usually PNG format).
+        Response from the API containing the heatmap tile's request iterator. Downlaod using file.write().
     
     Raises:
         ValueError: If invalid parameters are provided.

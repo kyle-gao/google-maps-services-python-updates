@@ -1,4 +1,6 @@
 import requests
+import numpy as np
+
 def download_map(request_iter, save_file):
     with open(save_file, "wb") as file:
         for chunk in request_iter:
@@ -35,3 +37,28 @@ def fetch_geo_tiff(
             f.write(data)
 
     return data                
+
+def latlon_to_tile_coords(lat, lon, zoom):
+    """
+    Convert latitude and longitude to tile x, y coordinates using numpy.
+    
+    Args:
+        lat (float or np.ndarray): Latitude in degrees.
+        lon (float or np.ndarray): Longitude in degrees.
+        zoom (int): Zoom level.
+
+    Returns:
+        tuple: (x_tile, y_tile) as integers or np.ndarrays of integers.
+    """
+    lat = np.asarray(lat, dtype=np.float64)
+    lon = np.asarray(lon, dtype=np.float64)
+
+    lat_rad = np.radians(lat)
+    n = 2 ** zoom
+
+    x_tile = np.floor((lon + 180.0) / 360.0 * n).astype(int)
+    y_tile = np.floor(
+        (1.0 - np.log(np.tan(lat_rad) + 1.0 / np.cos(lat_rad)) / np.pi) / 2.0 * n
+    ).astype(int)
+
+    return x_tile, y_tile
