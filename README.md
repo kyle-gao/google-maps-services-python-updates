@@ -1,6 +1,10 @@
-## Feb-02-08: Testing additions to These client bindings:
+Updates for Google Maps Services Python Client
+====================================
+## May-14-25: Added Air Quality APIs, Weather APIs, Solar APIs for the Google Maps Service Python Client
+## Feb-02-25: Testing additions to these client bindings:
+-Air Quality History, Heatmaps, Current.
 ## Planning to add Air Quality API and Traffic API.
-
+____________________________________
 Python Client for Google Maps Services
 ====================================
 
